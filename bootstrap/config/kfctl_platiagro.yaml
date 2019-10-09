@@ -63,13 +63,30 @@ spec:
           name: manifests
           path: argo
       name: argo
+    #- kustomizeConfig:
+    #    overlays:
+    #      - istio
+    #    repoRef:
+    #      name: manifests
+    #      path: common/centraldashboard
+    #  name: centraldashboard
     - kustomizeConfig:
         overlays:
           - istio
         repoRef:
           name: manifests
-          path: common/centraldashboard
-      name: centraldashboard
+          path: platiagro/web-ui
+      name: web-ui
+    - kustomizeConfig:
+        repoRef:
+          name: manifests
+          path: platiagro/dataset-store
+      name: dataset-store
+    - kustomizeConfig:
+        repoRef:
+          name: manifests
+          path: platiagro/projects
+      name: projects
     - kustomizeConfig:
         repoRef:
           name: manifests
