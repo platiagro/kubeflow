@@ -78,11 +78,15 @@ spec:
           path: platiagro/web-ui
       name: web-ui
     - kustomizeConfig:
+        overlays:
+          - istio
         repoRef:
           name: manifests
           path: platiagro/dataset-store
       name: dataset-store
     - kustomizeConfig:
+        overlays:
+          - istio
         repoRef:
           name: manifests
           path: platiagro/projects
@@ -119,6 +123,8 @@ spec:
           path: pipeline/api-service
       name: api-service
     - kustomizeConfig:
+        overlays:
+          - istio
         parameters:
           - name: minioPvcName
             value: minio-pv-claim
