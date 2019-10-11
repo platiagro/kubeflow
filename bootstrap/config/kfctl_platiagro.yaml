@@ -15,6 +15,34 @@ spec:
   applications:
     # Istio install. If not needed, comment out istio-crds and istio-install.
     - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
+          path: platiagro/foragri-apps
+      name: foragri-apps
+    - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
+          path: platiagro/dataset-store
+      name: dataset-store
+     - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
+          path: platiagro/projects
+      name: projects
+     - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
+          path: platiagro/web-ui
+      name: web-ui
+    - kustomizeConfig:
         parameters:
           - name: namespace
             value: istio-system
@@ -70,27 +98,6 @@ spec:
     #      name: manifests
     #      path: common/centraldashboard
     #  name: centraldashboard
-    - kustomizeConfig:
-        overlays:
-          - istio
-        repoRef:
-          name: manifests
-          path: platiagro/web-ui
-      name: web-ui
-    - kustomizeConfig:
-        overlays:
-          - istio
-        repoRef:
-          name: manifests
-          path: platiagro/dataset-store
-      name: dataset-store
-    - kustomizeConfig:
-        overlays:
-          - istio
-        repoRef:
-          name: manifests
-          path: platiagro/projects
-      name: projects
     - kustomizeConfig:
         repoRef:
           name: manifests
