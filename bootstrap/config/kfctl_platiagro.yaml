@@ -27,7 +27,7 @@ spec:
         repoRef:
           name: manifests
           path: platiagro/dataset-store
-      name: dataset-store
+       name: dataset-store
      - kustomizeConfig:
         overlays:
           - istio
