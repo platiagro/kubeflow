@@ -75,6 +75,13 @@ spec:
           - istio
         repoRef:
           name: manifests
+          path: platiagro/model-drift-explorer
+      name: model-drift-explorer
+    - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
           path: platiagro/foragri-frutas
       name: foragri-frutas
     - kustomizeConfig:
