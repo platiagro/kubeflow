@@ -75,6 +75,20 @@ spec:
           - istio
         repoRef:
           name: manifests
+          path: platiagro/foragri-frutas
+      name: foragri-frutas
+    - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
+          path: platiagro/foragri-falha
+      name: foragri-falha
+    - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
           path: platiagro/dataset-store
       name: dataset-store
     - kustomizeConfig:
