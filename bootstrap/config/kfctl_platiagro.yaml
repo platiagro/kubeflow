@@ -71,34 +71,6 @@ spec:
     #      path: common/centraldashboard
     #  name: centraldashboard
     - kustomizeConfig:
-        overlays:
-          - istio
-        repoRef:
-          name: manifests
-          path: platiagro/dataset-store
-      name: dataset-store
-    - kustomizeConfig:
-        overlays:
-          - istio
-        repoRef:
-          name: manifests
-          path: platiagro/pipeline-generator
-      name: pipeline-generator  
-    - kustomizeConfig:
-        overlays:
-          - istio
-        repoRef:
-          name: manifests
-          path: platiagro/projects
-      name: projects
-    - kustomizeConfig:
-        overlays:
-          - istio
-        repoRef:
-          name: manifests
-          path: platiagro/web-ui
-      name: web-ui
-    - kustomizeConfig:
         repoRef:
           name: manifests
           path: admission-webhook/bootstrap
@@ -192,6 +164,34 @@ spec:
           name: manifests
           path: seldon/seldon-core-operator
       name: seldon-core-operator   
+    - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
+          path: platiagro/dataset-store
+      name: dataset-store
+    - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
+          path: platiagro/pipeline-generator
+      name: pipeline-generator  
+    - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
+          path: platiagro/projects
+      name: projects
+    - kustomizeConfig:
+        overlays:
+          - istio
+        repoRef:
+          name: manifests
+          path: platiagro/web-ui
+      name: web-ui  
   enableApplications: true
   packageManager: kustomize
   skipInitProject: true
