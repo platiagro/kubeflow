@@ -112,18 +112,6 @@ RUN pip3 --no-cache-dir install \
 
 COPY --chown=jovyan:users requirements.txt /tmp
 
-# Install extra R packages
-RUN conda install --yes \
-  "r-optparse=1.6.2" \
-  "r-aws.s3=0.3.20" \
-  "r-plumber=0.4.6" \
-  "r-jsonlite=1.6" \
-  "r-urltools=1.7.3" \
-  "r-rcpproll=0.3.0" \
-  "r-tsibble=0.8.5" \
-  "r-e1071=1.7_1" && \
-  conda clean -tipsy
-
 # Install extra Python packages
 RUN apt-get update && apt-get install -yq --no-install-recommends \
   swig \
@@ -138,38 +126,32 @@ RUN conda install --yes \
   "minio"
 RUN pip --no-cache-dir install \
   git+https://github.com/automl/auto-sklearn.git@47bbd11c02d72a350ea4fd8dc89d46935b7bc04d \
-  git+https://github.com/nteract/papermill.git@17d4bbb3960c30c263bca835e48baf34322a3530 \
-  https://storage.googleapis.com/ml-pipeline/release/latest/kfp.tar.gz \
-  kubeflow-metadata \
-  kubeflow-fairing \
-  gcsfs
+  git+https://github.com/nteract/papermill.git@17d4bbb3960c30c263bca835e48baf34322a3530
 RUN conda install --yes \
   pytorch torchvision cpuonly -c pytorch
 
-# Enable metrics for kubeflow pipelines
-RUN touch /mlpipeline-metrics.json && \
-  chown ${NB_USER}:users /mlpipeline-metrics.json
+# Platiagro SDK
+RUN pip --no-cache-dir install git+https://github.com/platiagro/sdk.git@master
 
-# Enable ui metadata for kubeflow pipelines
-RUN touch /mlpipeline-ui-metadata.json && \
-  chown ${NB_USER}:users /mlpipeline-ui-metadata.json
+# Install Jupyter Notebook
+RUN pip --no-cache-dir install git+https://github.com/platiagro/notebook.git@platiagro 
 
-RUN docker-credential-gcr configure-docker && chown ${NB_USER}:users $HOME/.docker/config.json
+# Install Jupyter Lab
+RUN cd /opt && \
+    wget -q https://github.com/platiagro/jupyterlab/archive/platiagro.zip && \
+    unzip -q platiagro.zip && \
+    rm platiagro.zip && \
+    cd jupyterlab-platiagro && \
+    pip --no-cache-dir install -e . && \
+    jlpm install && \
+    jlpm run build 
+
+RUN chown -R ${NB_USER}:users $HOME/.local
 
 # Configure container startup
 EXPOSE 8888
 
 USER jovyan
-
-# Install Jupyter Notebook, Lab, and Hub
-RUN pip install git+https://github.com/platiagro/notebook.git@platiagro 
-RUN git clone -b platiagro https://github.com/platiagro/jupyterlab && \
-    cd jupyterlab && \
-    pip install -e . && \
-    jlpm install && \
-    jlpm run build 
-RUN  pip install jupyterhub 
-RUN  mkdir /home/${NB_USER}/platiagro
 
 # Configure Minio credentials
 RUN aws --profile default configure set aws_access_key_id "minio" && \
@@ -181,4 +163,4 @@ ENV AWS_ACCESS_KEY_ID=minio
 ENV AWS_SECRET_ACCESS_KEY=minio123
 
 ENTRYPOINT ["tini", "--"]
-CMD ["sh","-c", "jupyter lab --dev-mode --notebook-dir=/home/${NB_USER}/platiagro --ip=0.0.0.0 --no-browser --allow-root --port=8888 --NotebookApp.token='' --NotebookApp.password='' --NotebookApp.allow_origin='*' --NotebookApp.base_url=${NB_PREFIX}"]
+CMD ["sh","-c", "jupyter lab --dev-mode --notebook-dir=/home/${NB_USER} --ip=0.0.0.0 --no-browser --allow-root --port=8888 --NotebookApp.token='' --NotebookApp.password='' --NotebookApp.allow_origin='*' --NotebookApp.base_url=${NB_PREFIX}"]
