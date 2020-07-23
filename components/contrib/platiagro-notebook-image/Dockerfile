@@ -162,6 +162,7 @@ RUN conda install --quiet --yes \
 # - PyTorch Lightning - lightweight PyTorch wrapper for ML researchers
 # - Transfomers - state-of-the-art natural language processing
 # - SacreBLEU - standard BLEU implementation
+# - xlrd - extract data from Microsoft Excel spreadsheet files
 RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requirements.txt | xargs -L 1 pip install --no-cache-dir \
  && pip install --no-cache-dir \
     seldon-core==1.0.2 \
@@ -172,6 +173,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     featuretools==0.14.0 \
     tensorflow==2.2.0 \
     networkx==2.4 \
+    xlrd==1.2.0 \
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
