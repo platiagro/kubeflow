@@ -175,7 +175,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     tensorflow==2.2.0 \
     networkx==2.4 \
     xlrd==1.2.0 \
-    pyserini==0.9.4.0 \
+    pyserini==0.8.1.0 \
     transformers==3.0.2 \
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
