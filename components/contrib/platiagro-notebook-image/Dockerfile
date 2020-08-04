@@ -25,6 +25,7 @@ RUN apt-get update \
     unzip \
     curl \
     swig \
+    openjdk-11-jdk \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
@@ -174,6 +175,8 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     tensorflow==2.2.0 \
     networkx==2.4 \
     xlrd==1.2.0 \
+    pyserini==0.9.4.0 \
+    transformers==3.0.2 \
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
