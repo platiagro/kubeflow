@@ -195,6 +195,10 @@ USER root
 COPY upload-to-jupyter.sh /usr/local/bin/
 RUN chmod a+rx /usr/local/bin/upload-to-jupyter.sh
 
+# Copy a script that we will use to save datasets using the SDK
+COPY save-dataset.sh /usr/local/bin/
+RUN chmod a+rx /usr/local/bin/save-dataset.sh
+
 # Unfortunately, Kubeflow pipelines mount volumes as root root (user group).
 # If we want to use this image in a ContainerOp where there are mount volumes,
 # the user must remain as root.
