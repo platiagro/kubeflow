@@ -1,20 +1,19 @@
 #!/bin/bash
 cat << EOF > save_dataset.py
 #!/opt/conda/bin/python
-from os import getenv
+from glob import glob
 from platiagro import save_dataset
 import pandas as pd
 
 
-dataset = getenv("DATASET", "")
-try:
-    dataframe = pd.read_csv(dataset)
-    save_dataset(dataset, dataframe)
-except pd.errors.EmptyDataError:
-    file_open = open(dataset,'rb')
-    save_dataset(dataset, file_open)
-   
-EOF
+csv_path = glob("/tmp/data/*.csv")[0]
+dataset = csv_path.split('/')[-1]
 
-chmod 755 save_dataset.py
-./save_dataset.py
+try:
+    df = pd.read_csv(csv_path)
+    save_dataset(name=dataset, df=df)
+except pd.errors.EmptyDataError:
+    content = open(csv_path, "rb")
+    save_dataset(name=dataset, data=content)
+
+EOF
