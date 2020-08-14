@@ -26,6 +26,8 @@ RUN apt-get update \
     curl \
     swig \
     openjdk-11-jdk \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
