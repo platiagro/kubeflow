@@ -124,6 +124,7 @@ RUN conda install --quiet --yes \
     'jupyterlab=2.1.2' \
     'ipywidgets=7.5.*' \
     'widgetsnbextension=3.5.*' \
+    'opencv=4.1.2' \
  && conda clean --all -f -y \
     # Activate ipywidgets extension in the environment that runs the notebook server
  && jupyter nbextension enable --py widgetsnbextension --sys-prefix \
