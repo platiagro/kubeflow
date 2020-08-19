@@ -193,6 +193,10 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     pytorch-lightning==0.7.5 \
     transformers==2.9.0 \
     sacrebleu==1.4.9 \
+	rouge_score==0.6.0\
+	spacy==2.2.4\
+	nltk==3.2.5\
+	torchtext==0.6.0\
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
