@@ -168,6 +168,7 @@ RUN conda install --quiet --yes \
 # - SacreBLEU - standard BLEU implementation
 # - xlrd - extract data from Microsoft Excel spreadsheet files
 # - imutils - functions to make basic image processing with OpenCV
+# - alibi - algorithms for monitoring and explaining machine learning models
 RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requirements.txt | xargs -L 1 pip install --no-cache-dir \
  && pip install --no-cache-dir \
     seldon-core==1.0.2 \
@@ -182,6 +183,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     pyserini==0.8.1.0 \
     transformers==3.0.2 \
     imutils==0.5.3 \
+    alibi==0.5.2 \
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
