@@ -171,7 +171,10 @@ RUN conda install --quiet --yes \
 # - rouge_score - python implementation of ROUGE (Automatic Evaluation of Summaries)
 # - spacy - library for advanced Natural Language Processing (NLP)
 # - nltk - natural language toolkit
+# - pystan - Stan, a package for Bayesian inference
 # - convertdate - converts between Gregorian dates and other calendar systems
+# - LunarCalendar - a lunar calendar converter
+# - holidays - generate and work with holidays
 # - plotly - interactive data visualization library
 # - torchtext - text utilities and datasets for PyTorch
 # - alibi - algorithms for monitoring and explaining machine learning models
@@ -193,7 +196,10 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     rouge_score==0.0.4 \
     spacy==2.2.4 \
     nltk==3.2.5 \
+    pystan==2.19.1.1 \
     convertdate==2.2.1 \
+    LunarCalendar==0.0.9 \
+    holidays==0.10.3 \
     plotly==4.9.0 \
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
