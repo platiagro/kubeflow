@@ -168,7 +168,13 @@ RUN conda install --quiet --yes \
 # - SacreBLEU - standard BLEU implementation
 # - xlrd - extract data from Microsoft Excel spreadsheet files
 # - imutils - functions to make basic image processing with OpenCV
+# - rouge_score - python implementation of ROUGE (Automatic Evaluation of Summaries)
+# - spacy - library for advanced Natural Language Processing (NLP)
+# - nltk - natural language toolkit
+# - convertdate - converts between Gregorian dates and other calendar systems
+# - torchtext - text utilities and datasets for PyTorch
 # - alibi - algorithms for monitoring and explaining machine learning models
+# - alibi-detect - algorithms for outlier detection, concept drift and metrics
 RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requirements.txt | xargs -L 1 pip install --no-cache-dir \
  && pip install --no-cache-dir \
     seldon-core==1.0.2 \
@@ -177,13 +183,16 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     imbalanced-learn==0.6.2 \
     auto-sklearn==0.7.0 \
     featuretools==0.14.0 \
-    tensorflow==2.2.0 \
+    tensorflow==2.3.0 \
     networkx==2.4 \
     xlrd==1.2.0 \
     pyserini==0.8.1.0 \
     transformers==3.0.2 \
     imutils==0.5.3 \
-    alibi==0.5.2 \
+    rouge_score==0.0.4 \
+    spacy==2.2.4 \
+    nltk==3.2.5 \
+    convertdate==2.2.1 \
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
@@ -193,10 +202,9 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     pytorch-lightning==0.7.5 \
     transformers==2.9.0 \
     sacrebleu==1.4.9 \
-	rouge_score==0.0.4\
-	spacy==2.2.4\
-	nltk==3.2.5\
-	torchtext==0.6.0\
+    torchtext==0.6.0 \
+    alibi==0.5.2 \
+    alibi-detect==0.4.1 \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
