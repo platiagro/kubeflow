@@ -172,6 +172,7 @@ RUN conda install --quiet --yes \
 # - spacy - library for advanced Natural Language Processing (NLP)
 # - nltk - natural language toolkit
 # - convertdate - converts between Gregorian dates and other calendar systems
+# - plotly - interactive data visualization library
 # - torchtext - text utilities and datasets for PyTorch
 # - alibi - algorithms for monitoring and explaining machine learning models
 # - alibi-detect - algorithms for outlier detection, concept drift and metrics
@@ -193,6 +194,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     spacy==2.2.4 \
     nltk==3.2.5 \
     convertdate==2.2.1 \
+    plotly==4.9.0 \
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
