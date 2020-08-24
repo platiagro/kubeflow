@@ -17,3 +17,6 @@ except pd.errors.EmptyDataError:
     save_dataset(name=dataset, data=content)
 
 EOF
+
+chmod 755 ./save_dataset.py
+./save_dataset.py
