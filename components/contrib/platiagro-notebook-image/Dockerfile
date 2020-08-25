@@ -132,6 +132,8 @@ RUN conda install --quiet --yes \
     # Check this URL for most recent compatibilities
     # https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
  && jupyter labextension install @jupyter-widgets/jupyterlab-manager@^2.0.0 --no-build \
+    # Install Plotly labextension
+ && jupyter labextension install jupyterlab-plotly@4.9.0 \
     # Install PlatIAgro extension for JupyterLab
  && pip --no-cache-dir install \
     git+https://github.com/platiagro/jupyterlab-extension.git@master \
