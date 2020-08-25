@@ -179,6 +179,7 @@ RUN conda install --quiet --yes \
 # - torchtext - text utilities and datasets for PyTorch
 # - alibi - algorithms for monitoring and explaining machine learning models
 # - alibi-detect - algorithms for outlier detection, concept drift and metrics
+# - matplotlib - library for creating static, animated, and interactive visualizations
 RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requirements.txt | xargs -L 1 pip install --no-cache-dir \
  && pip install --no-cache-dir \
     seldon-core==1.0.2 \
@@ -213,6 +214,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     torchtext==0.6.0 \
     alibi==0.5.2 \
     alibi-detect==0.4.1 \
+    matplotlib==3.3.0 \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
