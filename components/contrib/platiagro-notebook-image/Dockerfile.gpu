@@ -202,6 +202,8 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     LunarCalendar==0.0.9 \
     holidays==0.10.3 \
     plotly==4.9.0 \
+	Unidecode==1.1.1 \
+	ftfy==5.8\
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
