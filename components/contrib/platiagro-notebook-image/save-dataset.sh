@@ -6,7 +6,7 @@ from platiagro import save_dataset
 import pandas as pd
 
 
-csv_path = glob("/tmp/data/*.csv")[0]
+csv_path = glob("/tmp/data/*.csv")[-1]
 dataset = csv_path.split('/')[-1]
 
 try:
