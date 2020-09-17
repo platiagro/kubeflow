@@ -144,10 +144,6 @@ RUN conda install --quiet --yes \
     # Install PlatIAgro extension for JupyterLab
  && pip --no-cache-dir install \
     git+https://github.com/platiagro/jupyterlab-extension.git@master \
- && pip --no-cache-dir install \
-    jupyter-http-over-ws==0.0.8 \
-    # Activate jupyter_http_over_ws extension
- && jupyter serverextension enable --py jupyter_http_over_ws \
  && jupyter lab build -y \
  && jupyter lab clean -y \
  && npm cache clean --force \
