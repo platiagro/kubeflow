@@ -124,6 +124,10 @@ RUN conda install --quiet --yes \
     'jupyterlab=2.1.2' \
     'ipywidgets=7.5.*' \
     'widgetsnbextension=3.5.*' \
+    'jupyterlab_code_formatter=1.3.6' \
+    'black=20.8b1' \
+    'isort=5.5.2' \
+    'nbresuse=0.3.6' \
     'opencv=4.1.2' \
  && conda clean --all -f -y \
     # Activate ipywidgets extension in the environment that runs the notebook server
@@ -132,21 +136,21 @@ RUN conda install --quiet --yes \
     # Check this URL for most recent compatibilities
     # https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
  && jupyter labextension install @jupyter-widgets/jupyterlab-manager@^2.0.0 --no-build \
-    # Install Jupyterlab Code Formatter (and Python formatters: black, isort)
- && jupyter labextension install @ryantam626/jupyterlab_code_formatter@1.3.6 --no-build \
- && pip --no-cache-dir install \
-    jupyterlab_code_formatter==1.3.6 \
-    black==20.8b1 \
-    isort==5.5.2 \
- && jupyter serverextension enable --py jupyterlab_code_formatter \
-    # Install Plotly labextension
- && jupyter labextension install jupyterlab-plotly@4.9.0 --no-build \
-    # Install JupyterLab System Monitor
- && pip --no-cache-dir install \
-    nbresuse==0.3.6 \
- && jupyter labextension install jupyterlab-topbar-extension@0.5.0 jupyterlab-system-monitor@0.6.0 --no-build \
-    # Install Table of Contents extension for JupyterLab
- && jupyter labextension install @jupyterlab/toc@4.0.0 --no-build \
+    # Activate jupyterlab_code_formatter server extension
+ && jupyter serverextension enable --py jupyterlab_code_formatter --sys-prefix \
+    # Install JupyterLab extensions:
+    # (defer rebuilding the application by including the flag --no-build)
+    # - Code Formatter
+    # - Plotly
+    # - Topbar
+    # - System Monitor
+    # - Table of Contents
+ && jupyter labextension install --no-build  \
+      @ryantam626/jupyterlab_code_formatter@1.3.6 \
+      jupyterlab-plotly@4.9.0 \
+      jupyterlab-topbar-extension@0.5.0 \
+      jupyterlab-system-monitor@0.6.0 \
+      @jupyterlab/toc@4.0.0 \
     # Install PlatIAgro extension for JupyterLab
  && pip --no-cache-dir install \
     git+https://github.com/platiagro/jupyterlab-extension.git@master \
