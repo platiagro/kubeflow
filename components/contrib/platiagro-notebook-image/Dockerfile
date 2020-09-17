@@ -141,6 +141,10 @@ RUN conda install --quiet --yes \
  && jupyter serverextension enable --py jupyterlab_code_formatter \
     # Install Plotly labextension
  && jupyter labextension install jupyterlab-plotly@4.9.0 \
+    # Install JupyterLab System Monitor
+ && pip --no-cache-dir install \
+    nbresuse==0.3.6 \
+ && jupyter labextension install jupyterlab-topbar-extension@0.5.0 jupyterlab-system-monitor@0.6.0 \
     # Install PlatIAgro extension for JupyterLab
  && pip --no-cache-dir install \
     git+https://github.com/platiagro/jupyterlab-extension.git@master \
