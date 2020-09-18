@@ -195,6 +195,9 @@ RUN conda install --quiet --yes \
 # - alibi - algorithms for monitoring and explaining machine learning models
 # - alibi-detect - algorithms for outlier detection, concept drift and metrics
 # - matplotlib - library for creating static, animated, and interactive visualizations
+# - Unidecode - ASCII transliterations of Unicode tex
+# - ftfy - Fixes some problems with Unicode text after the fact
+# - scikit-video - Video processing routines
 RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requirements.txt | xargs -L 1 pip install --no-cache-dir \
  && pip install --no-cache-dir \
     seldon-core==1.0.2 \
@@ -219,6 +222,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     plotly==4.9.0 \
     Unidecode==1.1.1 \
     ftfy==5.8 \
+    scikit-video==1.1.11 \
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
