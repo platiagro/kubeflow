@@ -241,6 +241,10 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
 
 USER root
 
+# Copy a script that we will use to make output notebook cells read only
+COPY make-cells-read-only.sh /usr/local/bin/
+RUN chmod a+rx /usr/local/bin/make-cells-read-only.sh
+
 # Copy a script that we will use to interact with jupyter
 COPY upload-to-jupyter.sh /usr/local/bin/
 RUN chmod a+rx /usr/local/bin/upload-to-jupyter.sh
