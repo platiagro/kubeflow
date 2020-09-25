@@ -19,6 +19,7 @@ RUN apt-get update \
     locales \
     fonts-liberation \
     run-one \
+    lsb-core \
     build-essential \
     gnupg2 \
     git \
@@ -28,6 +29,11 @@ RUN apt-get update \
     openjdk-11-jdk \
     libgl1-mesa-glx \
     libglib2.0-0 \
+ && export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" \
+ && echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" > /etc/apt/sources.list.d/google-cloud-sdk.list \
+ && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
+ && apt-get update \
+ && apt-get install -y google-cloud-sdk kubectl \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
@@ -103,7 +109,8 @@ RUN cd /tmp \
  && git clone https://github.com/platiagro/datasets/ \
  && mv datasets/samples/*.csv datasets \
  && find datasets -mindepth 1 -type f,d -not -name '*.csv' -delete \
- && mv datasets data
+ && mv datasets data \
+ && gcloud config set pass_credentials_to_gsutil false
 
 # Install Tini
 RUN conda install --quiet --yes 'tini=0.18.0' \
