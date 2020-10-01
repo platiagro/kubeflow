@@ -205,7 +205,6 @@ RUN conda install --quiet --yes \
 # - Unidecode - ASCII transliterations of Unicode tex
 # - ftfy - Fixes some problems with Unicode text after the fact
 # - scikit-video - Video processing routines
-# - en-core-web-sm==2.2.5 - spacy package to get english corpus
 # - nlp==0.4.0 - package with datasets and metric pre implemented for nlp solutions
 # - tqdm==4.41.1 - progress bar
 # - git+https://github.com/albumentations-team/albumentations - package to make data augmentation in computer vision
@@ -239,7 +238,6 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     Unidecode==1.1.1 \
     ftfy==5.8 \
     scikit-video==1.1.11 \
-	en-core-web-sm==2.2.5 \
 	nlp==0.4.0 \
 	tqdm==4.41.1 \
 	git+https://github.com/albumentations-team/albumentations \
