@@ -205,6 +205,15 @@ RUN conda install --quiet --yes \
 # - Unidecode - ASCII transliterations of Unicode tex
 # - ftfy - Fixes some problems with Unicode text after the fact
 # - scikit-video - Video processing routines
+# - en-core-web-sm==2.2.5 - spacy package to get english corpus
+# - nlp==0.4.0 - package with datasets and metric pre implemented for nlp solutions
+# - tqdm==4.41.1 - progress bar
+# - git+https://github.com/albumentations-team/albumentations - package to make data augmentation in computer vision
+# - gensim==3.6.0 - nlp package with many funcionalities pre-implemented
+# - numba==0.48.0 - package to paralelize cpus
+# - jsonlines==1.2.0 - package to save and read with lists of dicionaries
+# - opencv-contrib-python==4.1.2.30 - package for work with images
+# - opencv-python==4.1.2.30 - package for work with images
 RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requirements.txt | xargs -L 1 pip install --no-cache-dir \
  && pip install --no-cache-dir \
     seldon-core==1.0.2 \
@@ -230,6 +239,15 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     Unidecode==1.1.1 \
     ftfy==5.8 \
     scikit-video==1.1.11 \
+	en-core-web-sm==2.2.5 \
+	nlp==0.4.0 \
+	tqdm==4.41.1 \
+	git+https://github.com/albumentations-team/albumentations \
+	gensim==3.6.0 \
+	numba==0.48.0 \
+	jsonlines==1.2.0 \
+	opencv-contrib-python==4.1.2.30 \
+	opencv-python==4.1.2.30 \
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
