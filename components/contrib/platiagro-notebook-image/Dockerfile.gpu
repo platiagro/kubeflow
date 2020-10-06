@@ -260,6 +260,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     alibi==0.5.2 \
     alibi-detect==0.4.1 \
     matplotlib==3.3.0 \
+ && pip uninstall -y typing \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
 
