@@ -238,14 +238,15 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     Unidecode==1.1.1 \
     ftfy==5.8 \
     scikit-video==1.1.11 \
-	nlp==0.4.0 \
-	tqdm==4.41.1 \
-	git+https://github.com/albumentations-team/albumentations \
-	gensim==3.6.0 \
-	numba==0.48.0 \
-	jsonlines==1.2.0 \
-	opencv-contrib-python==4.1.2.30 \
-	opencv-python==4.1.2.30 \
+    "smac>=0.12,<0.13" \
+    nlp==0.4.0 \
+    tqdm==4.41.1 \
+    git+https://github.com/albumentations-team/albumentations \
+    gensim==3.6.0 \
+    numba==0.48.0 \
+    jsonlines==1.2.0 \
+    opencv-contrib-python==4.1.2.30 \
+    opencv-python==4.1.2.30 \
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
