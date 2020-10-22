@@ -12,6 +12,9 @@ USER root
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
  && apt-get install -yq --no-install-recommends \
+	tesseract-ocr\
+	tesseract-ocr-por\
+	tesseract-ocr-eng\
     wget \
     bzip2 \
     ca-certificates \
@@ -213,6 +216,8 @@ RUN conda install --quiet --yes \
 # - jsonlines==1.2.0 - package to save and read with lists of dicionaries
 # - opencv-contrib-python==4.1.2.30 - package for work with images
 # - opencv-python==4.1.2.30 - package for work with images
+# -  jiwer==2.1.0 package with some metrics used in OCR
+# -  pytesseract==0.3.6 package with OCR algorithms
 RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requirements.txt | xargs -L 1 pip install --no-cache-dir \
  && pip install --no-cache-dir \
     seldon-core==1.0.2 \
@@ -247,6 +252,8 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     jsonlines==1.2.0 \
     opencv-contrib-python==4.1.2.30 \
     opencv-python==4.1.2.30 \
+	jiwer==2.1.0\
+	pytesseract==0.3.6\
     git+https://github.com/platiagro/sdk.git@master \
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
