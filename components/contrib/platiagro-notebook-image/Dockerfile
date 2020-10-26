@@ -261,7 +261,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     torchvision==0.6.0+cpu \
  && pip install --no-cache-dir \
     pytorch-lightning==0.7.5 \
-    transformers==2.9.0 \
+    transformers==3.0.2 \
     sacrebleu==1.4.9 \
     torchtext==0.6.0 \
     alibi==0.5.2 \
