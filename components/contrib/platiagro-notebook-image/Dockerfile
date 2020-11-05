@@ -221,6 +221,7 @@ RUN conda install --quiet --yes \
 # - jiwer==2.1.0 package with some metrics used in OCR
 # - pytesseract==0.3.6 package with OCR algorithms
 # - gdown=3.12.2 download google drive files
+# - facenet-pytorch=2.5.0 package with mtcnn for face-detection and inception for face-recognition
 RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requirements.txt | xargs -L 1 pip install --no-cache-dir \
  && pip install --no-cache-dir \
     seldon-core==1.0.2 \
@@ -259,6 +260,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     pytesseract==0.3.6 \
 	gdown=3.12.2\
     git+https://github.com/platiagro/sdk.git@master \
+	facenet-pytorch==2.5.0\
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
     torch==1.5.0+cpu \
