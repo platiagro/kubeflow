@@ -278,8 +278,8 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     transformers==3.0.2 \
     sacrebleu==1.4.9 \
     torchtext==0.6.0 \
-    alibi==0.5.2 \
-    alibi-detect==0.4.1 \
+    alibi==0.5.5 \
+    alibi-detect==0.4.3 \
     matplotlib==3.3.0 \
  && pip uninstall -y typing \
  && fix-permissions $CONDA_DIR \
