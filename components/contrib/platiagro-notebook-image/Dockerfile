@@ -227,6 +227,8 @@ RUN conda install --quiet --yes \
 # - yolov4==2.0.0 lib of yolov4
 # - openpyxl==3.0.5 read and write xlsx files within pandas
 # - statsmodels==0.12.1 Statistical computations and models for Python
+# - facenet-pytorch=2.5.0 package with mtcnn for face-detection and inception for face-recognition
+
 RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requirements.txt | xargs -L 1 pip install --no-cache-dir \
  && pip install --no-cache-dir \
     seldon-core==1.0.2 \
@@ -270,6 +272,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     yolov4==2.0.0 \
     openpyxl==3.0.5 \
     git+https://github.com/platiagro/sdk.git@v0.1.0 \
+	facenet-pytorch==2.5.0\
  && pip install --no-cache-dir \
     -f https://download.pytorch.org/whl/torch_stable.html \
     torch==1.5.0+cpu \
