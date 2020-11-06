@@ -226,6 +226,7 @@ RUN conda install --quiet --yes \
 # - pyDOE==0.3.8 lib pre-requisite of yolov4
 # - yolov4==2.0.0 lib of yolov4
 # - openpyxl==3.0.5 read and write xlsx files within pandas
+# - statsmodels==0.12.1 Statistical computations and models for Python
 RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requirements.txt | xargs -L 1 pip install --no-cache-dir \
  && pip install --no-cache-dir \
     seldon-core==1.0.2 \
@@ -281,6 +282,7 @@ RUN curl -sSL https://raw.githubusercontent.com/automl/auto-sklearn/v.0.7.0/requ
     alibi==0.5.5 \
     alibi-detect==0.4.3 \
     matplotlib==3.3.0 \
+    statsmodels==0.12.1 \
  && pip uninstall -y typing \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
