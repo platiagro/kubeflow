@@ -13,6 +13,8 @@ import papermill
 import requests
 import platiagro
 
+from .queue import execute_papermill_as_queue
+
 BASE_URL = os.getenv(
     "JUPYTER_ENDPOINT",
     "http://server.anonymous:80/notebook/anonymous/server/api/contents",
@@ -132,20 +134,20 @@ class Model:
         df = pd.DataFrame(X, columns=feature_names)
         df.to_csv(dataset_path, index=False)
 
+        
         notebook_path = "/task/Experiment.ipynb"
         output_path = f"deployments/{DEPLOYMENT_ID}/Monitoring.ipynb"
         os.makedirs(output_path.rsplit("/", 1)[0], exist_ok=True)
+        
+        context = {
+            "notebook_path": notebook_path,
+            "output_path": output_path,
+        }
 
         logging.info(f"Executing notebook {notebook_path}...")
-        try:
-            papermill.execute_notebook(
-                notebook_path,
-                output_path,
-                parameters={"dataset": dataset_path},
-            )
-        except papermill.exceptions.PapermillExecutionError:
-            logging.exception("Monitoring Task Error")
-            pass
+        
+        # putting notebook execution as queue to prevent congestion problems
+        execute_papermill_as_queue(context)
 
         make_cells_readonly(output_path)
         upload_to_jupyter(output_path)
