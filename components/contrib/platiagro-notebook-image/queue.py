@@ -11,7 +11,7 @@ WORKERS_QTY = 3
 def create_workers(workers_qty, worker_callable):
     tasks = []
     for i in range(workers_qty):
-        task = asyncio.create_task(worker_callable(queue)) 
+        task = asyncio.create_task(worker_callable) 
         tasks.append(task)   
     return tasks
 
@@ -48,7 +48,7 @@ async def execute_papermill_as_queue(context):
     insert_queue_element(context, queue)
 
 
-    tasks = create_workers(WORKERS_QTY, create_workers)
+    tasks = create_workers(WORKERS_QTY, worker)
 
     # Wait until the queue is fully processed.
     await queue.join()
