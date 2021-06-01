@@ -11,6 +11,7 @@ ENV PARAMETERS '[]'
 ENV LOG_LEVEL INFO
 
 COPY Model.py /app/
+COPY papermill_queue.py /app/
 
 EXPOSE 5000
 CMD ["sh", "-c", "seldon-core-microservice \"$MODEL_NAME\" \"$API_TYPE\" --service-type \"$SERVICE_TYPE\" --persistence \"$PERSISTENCE\" --parameters \"$PARAMETERS\" --log-level \"$LOG_LEVEL\""]

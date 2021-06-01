@@ -3,15 +3,17 @@
 This file starts a server that handles requests and runs a Jupyter notebook
 file using papermill, then saves generated figures to PlatIAgro.
 """
+import asyncio
 import json
 import logging
 import os
 import tempfile
 
-import pandas as pd
-import papermill
 import requests
+
+import pandas as pd
 import platiagro
+from papermill_queue import execute_papermill_as_queue
 
 BASE_URL = os.getenv(
     "JUPYTER_ENDPOINT",
@@ -150,16 +152,14 @@ class Model:
         output_path = f"deployments/{DEPLOYMENT_ID}/Monitoring.ipynb"
         os.makedirs(output_path.rsplit("/", 1)[0], exist_ok=True)
 
+        # putting notebook execution as queue to prevent congestion problems
+        context = {
+            "notebook_path": notebook_path,
+            "output_path": output_path,
+            "parameters": {"dataset": dataset_path}
+        }
         logging.info(f"Executing notebook {notebook_path}...")
-        try:
-            papermill.execute_notebook(
-                notebook_path,
-                output_path,
-                parameters={"dataset": dataset_path},
-            )
-        except papermill.exceptions.PapermillExecutionError:
-            logging.exception("Monitoring Task Error")
-            pass
+        asyncio.run(execute_papermill_as_queue(context))
 
         make_cells_readonly(output_path)
         upload_to_jupyter(output_path)
