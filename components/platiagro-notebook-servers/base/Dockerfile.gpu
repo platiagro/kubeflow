@@ -1,0 +1,48 @@
+FROM public.ecr.aws/j1r0q0g6/notebooks/notebook-servers/jupyter:master-ebc0c4f0
+
+LABEL maintainer="fabiol@cpqd.com.br"
+
+# nvidia configs
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nv
+
+USER root
+
+# install build tools and tesseract ocr
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get update \
+ && apt-get install -yq --no-install-recommends \
+    build-essential \
+    swig \
+    tesseract-ocr \
+    tesseract-ocr-por \
+    tesseract-ocr-eng \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+# switch to NB_UID for installs
+USER ${NB_UID}
+
+# install - requirements-common.txt
+COPY --chown=jovyan:users requirements-common.txt /tmp/requirements.txt
+RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir \
+ && rm -f /tmp/requirements.txt
+
+# install - requirements-gpu-only.txt
+COPY --chown=jovyan:users requirements-gpu-only.txt /tmp/requirements.txt
+RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir -f https://download.pytorch.org/whl/torch_stable.html \
+ && rm -f /tmp/requirements.txt
+
+# Copy a custom jupyter config file
+# Currently, only custom option is FileContentsManager.delete_to_trash = False
+# This is necessary since notebook server has many volumes mounted and
+# using trash folder may cause the error
+# Invalid cross-device link: '/home/jovyan/tasks/...' -> '/home/jovyan/.local/share/Trash/...'
+COPY jupyter_notebook_config.py "${HOME}/.jupyter/"
+
+# Unfortunately, Kubeflow pipelines mounts volumes as root root (user group).
+# If we want to use this image in a ContainerOp where there are mount volumes,
+# the user must remain as root.
+# Kubeflow must add support to PodsecurityContext before we can change this.
+USER root
