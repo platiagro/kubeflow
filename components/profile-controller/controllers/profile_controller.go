@@ -70,6 +70,7 @@ var kubeflowNamespaceLabels = map[string]string{
 	"serving.kubeflow.org/inferenceservice": "enabled",
 	"pipelines.kubeflow.org/enabled":        "true",
 	"app.kubernetes.io/part-of":             "kubeflow-profile",
+	"eventing.knative.dev/injection":        "enabled",
 }
 
 const DEFAULT_EDITOR = "default-editor"
