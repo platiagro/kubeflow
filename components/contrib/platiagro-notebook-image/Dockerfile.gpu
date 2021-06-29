@@ -241,7 +241,6 @@ RUN conda install --quiet --yes \
 # - dvc[all]==2.3.0 - manage your code and data together
 # - PyPDF4 - Convert PDF to text
 # - rank-bm25 - Use Rank BM25 algorithim to rank texts
-# - nlg-eval - Easy extract nlp metrics
 
 # Installs numpy and packages that don't depend on numpy
 RUN pip install --no-cache-dir \
@@ -322,7 +321,6 @@ RUN pip install --no-cache-dir \
     yolov4==2.1.0 \
     PyPDF4==1.27.0 \
     rank-bm25==0.2.1 \
-    git+https://github.com/Maluuba/nlg-eval.git@master \
  && pip uninstall -y typing \
  && fix-permissions $CONDA_DIR \
  && fix-permissions /home/$NB_USER
