@@ -4,40 +4,65 @@ LABEL maintainer="fabiol@cpqd.com.br"
 
 USER root
 
-# install build tools and tesseract ocr
-RUN export DEBIAN_FRONTEND=noninteractive \
- && apt-get update \
+# Install all OS dependencies for notebook server that starts but lacks all
+# features (e.g., download as all possible file formats)
+ENV DEBIAN_FRONTEND noninteractive
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN apt-get update \
  && apt-get install -yq --no-install-recommends \
-    build-essential \
-    swig \
-    tesseract-ocr \
-    tesseract-ocr-por \
-    tesseract-ocr-eng \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+    build-essential=12.8ubuntu1 \
+    swig=4.0.1-5build1 \
+    libgl1-mesa-glx=20.2.6-0ubuntu0.20.04.1 \
+    libglib2.0-0=2.64.6-1~ubuntu20.04.3 \
+    libsm6=2:1.2.3-1 \
+    tesseract-ocr=4.1.1-2build2 \
+    tesseract-ocr-por=1:4.00~git30-7274cfa-1 \
+    tesseract-ocr-eng=1:4.00~git30-7274cfa-1 \
+ && echo "deb http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
+ && wget -q -O - https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends google-cloud-sdk=346.0.0-0 \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# switch to NB_UID for installs
-USER ${NB_UID}
+# Enable prompt color in the skeleton .bashrc before creating the default NB_USER
+RUN sed -i 's/^#force_color_prompt=yes/force_color_prompt=yes/' /etc/skel/.bashrc
 
-# install - requirements-common.txt
-COPY --chown=jovyan:users requirements-common.txt /tmp/requirements.txt
-RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir \
- && rm -f /tmp/requirements.txt
+USER $NB_UID
+WORKDIR $HOME
 
-# install - requirements-cpu-only.txt
-COPY --chown=jovyan:users requirements-cpu-only.txt /tmp/requirements.txt
-RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir -f https://download.pytorch.org/whl/torch_stable.html \
- && rm -f /tmp/requirements.txt
+
+# Export MinIO credentials - required for Papermill and PlatIAgro SDK
+ENV BOTO3_ENDPOINT_URL=http://minio-service.kubeflow:9000 \
+    AWS_ACCESS_KEY_ID=minio \
+    AWS_SECRET_ACCESS_KEY=minio123
+
+
+# install - requirements.txt
+COPY --chown=jovyan:users requirements-cpu.txt /tmp/requirements.txt
+RUN python3 -m pip install -r /tmp/requirements.txt --no-cache-dir \
+ && rm -f /tmp/requirements.txt 
+
+# install - requirements-isolation.txt
+COPY --chown=jovyan:users requirements-isolation.txt /tmp/requirements.txt
+RUN python3 -m pip install -r /tmp/requirements.txt --no-cache-dir --no-build-isolation \
+ && rm -f /tmp/requirements.txt \
+ && pip uninstall -y typing
+
+# user root
+USER root
 
 # Copy a custom jupyter config file
 # Currently, only custom option is FileContentsManager.delete_to_trash = False
 # This is necessary since notebook server has many volumes mounted and
 # using trash folder may cause the error
-# Invalid cross-device link: '/home/jovyan/tasks/...' -> '/home/jovyan/.local/share/Trash/...'
+# Invalid cross-device link: '/home/jovyan/tasks/...' -> '/home/jovyan/.local/share/Trash/...''
 COPY jupyter_notebook_config.py "${HOME}/.jupyter/"
 
 # Unfortunately, Kubeflow pipelines mount volumes as root root (user group).
 # If we want to use this image in a ContainerOp where there are mount volumes,
 # the user must remain as root.
 # Kubeflow must add support to PodsecurityContext before we can change this.
-USER root
+# https://github.com/kubeflow/pipelines/blob/master/sdk/python/kfp/components/structures/kubernetes/v1.py
+# USER $NB_UID
+
+EXPOSE 8888
