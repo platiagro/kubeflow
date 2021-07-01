@@ -30,13 +30,6 @@ RUN sed -i 's/^#force_color_prompt=yes/force_color_prompt=yes/' /etc/skel/.bashr
 USER $NB_UID
 WORKDIR $HOME
 
-
-# Export MinIO credentials - required for Papermill and PlatIAgro SDK
-ENV BOTO3_ENDPOINT_URL=http://minio-service.kubeflow:9000 \
-    AWS_ACCESS_KEY_ID=minio \
-    AWS_SECRET_ACCESS_KEY=minio123
-
-
 # install - requirements.txt
 COPY --chown=jovyan:users requirements-cpu.txt /tmp/requirements.txt
 RUN python3 -m pip install -r /tmp/requirements.txt --no-cache-dir \
