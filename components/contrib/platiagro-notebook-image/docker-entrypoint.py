@@ -249,10 +249,10 @@ def main():
 
     exception = None
 
-    if dataset != "":
+    if dataset:
         download_dataset(dataset)
 
-    if notebook_path != "":
+    if notebook_path:
         try:
             execute_notebook(notebook_path, output_path)
         except papermill.exceptions.PapermillExecutionError as e:
@@ -265,7 +265,7 @@ def main():
 
         save_figures(output_path)
 
-    if dataset != "":
+    if dataset:
         save_dataset(dataset)
 
     if exception is not None:
