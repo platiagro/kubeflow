@@ -1,0 +1,33 @@
+# Install:
+# - numpy~=1.19.5 - is the fundamental package for array computing with Python.
+numpy==1.19.5
+# - jsonlines==1.2.0 - library with helpers for the jsonlines file format
+jsonlines==1.2.0
+# - joblib==1.0.1 - is a set of tools to provide lightweight pipelining in Python.
+joblib==1.0.1
+# - nltk==3.2.5 - natural language toolkit
+nltk==3.2.5
+# - pytesseract==0.3.6 - package with OCR algorithms
+pytesseract==0.3.6
+# - gdown==3.12.2 - download google drive files
+gdown==3.12.2
+# - plotly>=4.14.1,<5 - interactive data visualization library
+plotly>=4.14.1,<5
+# - psutil==5.8.0 - Cross-platform lib for process and system monitoring in Python.
+psutil==5.8.0
+# - tqdm==4.41.1 - progress bar
+tqdm==4.41.1
+# - sacrebleu==1.4.9 - standard BLEU implementation
+sacrebleu==1.4.9
+# - sentencepiece==0.1.95 - SentencePiece python wrapper
+sentencepiece==0.1.95
+# - Unidecode==1.1.1 - ASCII transliterations of Unicode tex
+Unidecode==1.1.1
+# - ftfyy==5.8 - Fixes some problems with Unicode text after the fact
+ftfy==5.8
+# - networkx==2.4 - creates and manipulates graphs and networks
+networkx==2.4
+# - setuptools==57.0.0 - Easily download, build, install, upgrade, and uninstall Python packages
+setuptools==57.0.0
+# - papermill==2.2.2 - tool for parameterizing and executing Jupyter Notebooks
+papermill==2.2.2
