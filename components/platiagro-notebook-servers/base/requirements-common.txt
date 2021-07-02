@@ -61,7 +61,7 @@ networkx==2.5.1
 
 # NLP Text pre-processor
 # https://github.com/platiagro/tasks/tree/main/tasks/nlp-text-pre-processor
-nltk==3.2.5
+nltk==3.4.5
 
 # CV OCR
 # https://github.com/platiagro/tasks/tree/main/tasks/cv-ocr

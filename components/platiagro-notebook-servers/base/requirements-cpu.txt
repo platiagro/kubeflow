@@ -5,8 +5,8 @@ numpy==1.19.5
 jsonlines==1.2.0
 # - joblib==1.0.1 - is a set of tools to provide lightweight pipelining in Python.
 joblib==1.0.1
-# - nltk==3.2.5 - natural language toolkit
-nltk==3.2.5
+# - nltk==3.4.5 - natural language toolkit
+nltk==3.4.5
 # - pytesseract==0.3.6 - package with OCR algorithms
 pytesseract==0.3.6
 # - gdown==3.12.2 - download google drive files
