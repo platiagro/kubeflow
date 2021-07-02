@@ -170,3 +170,5 @@ class Model:
         delete_figure(output_path)
         save_figures(output_path)
         os.remove(dataset_path)
+
+        return "OK"
