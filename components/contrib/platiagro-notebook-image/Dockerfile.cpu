@@ -84,11 +84,7 @@ ARG PYTHON_VERSION=default
 RUN mkdir /home/$NB_USER/work  \
  && fix-permissions /home/$NB_USER
 
-# Export MinIO credentials - required for Papermill and PlatIAgro SDK
-ENV BOTO3_ENDPOINT_URL=http://minio-service.kubeflow:9000 \
-    AWS_ACCESS_KEY_ID=minio \
-    AWS_SECRET_ACCESS_KEY=minio123 \
-    MINICONDA_VERSION=4.8.2 \
+ENV MINICONDA_VERSION=4.8.2 \
     MINICONDA_MD5=87e77f097f6ebb5127c77662dfc3165e \
     CONDA_VERSION=4.8.2
 
