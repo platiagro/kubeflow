@@ -5,3 +5,7 @@ torchaudio==0.7.2
 
 # tensorflow packages
 tensorflow-gpu==2.4.1
+
+# Hypertuner for Keras
+keras-tuner==1.0.2
+autokeras==1.0.12
